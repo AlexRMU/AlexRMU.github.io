@@ -154,7 +154,7 @@ const w = window.EnvyCrmWidget;
 
 w.getParams()
     .then((params) => {
-        console.log(params);
+        console.log("params", params);
     })
     .catch((e) => {
         console.log(e);
@@ -165,7 +165,7 @@ w.getDealValue({
     type: "custom",
 })
     .then((data) => {
-        console.log(data);
+        console.log("data", data);
     })
     .catch((e) => {
         console.log(e);
@@ -176,7 +176,7 @@ w.getDealValue({
     type: "service",
 })
     .then((data) => {
-        console.log(data);
+        console.log("data", data);
     })
     .catch((e) => {
         console.log(e);
@@ -187,7 +187,7 @@ w.getClientValue({
     type: "custom",
 })
     .then((data) => {
-        console.log(data);
+        console.log("data", data);
     })
     .catch((e) => {
         console.log(e);
@@ -198,7 +198,7 @@ w.getClientValue({
     type: "service",
 })
     .then((data) => {
-        console.log(data);
+        console.log("data", data);
     })
     .catch((e) => {
         console.log(e);
@@ -206,7 +206,7 @@ w.getClientValue({
 
 w.getDeal()
     .then((deal) => {
-        console.log(deal);
+        console.log("deal", deal);
     })
     .catch((e) => {
         console.log(e);
