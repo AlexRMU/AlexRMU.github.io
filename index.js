@@ -174,6 +174,7 @@ const w = window.EnvyCrmWidget;
 let searchParams = new URLSearchParams(window.location.search);
 let client_id = searchParams.get("client_id");
 let deal_id = searchParams.get("deal_id");
+console.log(window.location);
 console.log(client_id);
 console.log(deal_id);
 
