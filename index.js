@@ -141,7 +141,7 @@ document.form1.addEventListener("input", (event) => {
     console.log("obj.total", obj.total);
 
     if (!isNaN(obj.total)) {
-        document.querySelector("textarea[name='summ']") = obj.total;
+        document.querySelector("textarea[name='summ']").value = obj.total;
     } else {
     }
 });
