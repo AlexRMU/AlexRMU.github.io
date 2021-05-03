@@ -17,7 +17,7 @@ document.form1.addEventListener("input", (event) => {
         dop_rol: parseFloat(document.form1.dop_rol),
         z_width: parseFloat(document.form1.z_width),
         z_height: parseFloat(document.form1.z_height),
-        pol: parseFloat(document.form1.pol),
+        pol: document.form1.pol,
         stoiki: parseFloat(document.form1.stoiki),
         dno: document.form1.dno.checked,
         pereg: parseFloat(document.form1.pereg),
