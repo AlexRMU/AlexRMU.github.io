@@ -150,14 +150,6 @@ function count() {
 
 document.form1.addEventListener("input", count);
 
-window.addEventListener(
-    "message",
-    (event) => {
-        console.log(event);
-    },
-    false
-);
-
 const w = window.EnvyCrmWidget;
 
 w.getParams()
