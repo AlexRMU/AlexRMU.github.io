@@ -4,6 +4,27 @@ let round = function (num, precision) {
     return Math.round(num / precision) * precision;
 };
 
+document.addEventListener("DOMContentLoaded", function (event) {
+    let params = {
+        "after-deal-task": function (params) {
+            let urlParams =
+                "?deal_id=" + params.dealID + "&client_id=" + params.clientID;
+            return [
+                {
+                    title: "Калькулятор",
+                    events: ["deal::update-value", "client::update-value"],
+                    content: {
+                        type: "iframe",
+                        url: "https://alexrmu.github.io/index.html" + urlParams,
+                        height: 160,
+                    },
+                },
+            ];
+        },
+    };
+    window.EnvyCrmWidget.init(params);
+});
+
 function count() {
     let obj = {
         total: 0,
