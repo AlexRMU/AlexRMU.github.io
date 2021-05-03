@@ -146,8 +146,6 @@ document.form1.addEventListener("input", (event) => {
     }
 });
 
-console.log("obj.tota1l")
-
 window.addEventListener(
     "message",
     (event) => {
@@ -217,7 +215,4 @@ w.getClientValue({
     .catch((e) => {
         console.log(e);
     });
-
-
-    console.log("obj.tota12l")
 
