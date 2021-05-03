@@ -208,11 +208,10 @@ w.getClientValue({
         console.log(e);
     });
 
-    w.getDeal()
+w.getDeal()
     .then((deal) => {
         console.log(deal);
     })
     .catch((e) => {
         console.log(e);
     });
-
