@@ -145,3 +145,74 @@ document.form1.addEventListener("input", (event) => {
     } else {
     }
 });
+
+window.addEventListener(
+    "message",
+    (event) => {
+        console.log(event);
+    },
+    false
+);
+
+const w = window.EnvyCrmWidget;
+
+w.getParams()
+    .then((params) => {
+        console.log(params);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+
+w.getDealValue({
+    input_id: 200,
+    type: "custom",
+})
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+
+w.getDealValue({
+    input_id: 2001,
+    type: "service",
+})
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+
+w.getClientValue({
+    input_id: 2244,
+    type: "custom",
+})
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+
+w.getClientValue({
+    input_id: 1001,
+    type: "service",
+})
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+
+    w.getDeal()
+    .then((deal) => {
+        console.log(deal);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+
