@@ -1,1 +1,147 @@
-let total,round=function(e,o){return e=parseFloat(e),o?Math.round(e/o)*o:e};document.form1.addEventListener("change",e=>{(parseFloat(document.form1.width.value)<700||""==document.form1.width.value)&&(document.form1.width.value=700),(6e3<parseFloat(document.form1.width.value)||""==document.form1.width.value)&&(document.form1.width.value=6e3),(parseFloat(document.form1.height.value)<2e3||""==document.form1.height.value)&&(document.form1.height.value=2e3),(3100<parseFloat(document.form1.height.value)||""==document.form1.height.value)&&(document.form1.height.value=3100)}),document.form1.addEventListener("input",e=>{var o;if(round(parseFloat(document.form1.width.value),50),round(parseFloat(document.form1.height.value),50),total=3e4,document.form1.krisha.checked&&(total-=700),document.form1.l_stenka.checked&&(total-=2e3),document.form1.p_stenka.checked&&(total-=2e3),document.form1.rol.checked&&(total-=7e3),""!=document.form1.dop_rol.value&&(total+=7e3*parseFloat(document.form1.dop_rol.value)),""!=document.form1.z_width.value&&""!=document.form1.z_height.value&&(o=parseFloat(document.form1.z_width.value)*parseFloat(document.form1.z_height.value),total+=o/1e6*2e3),""!=document.form1.pol.value){let o={};o.dl=document.form1.pol.value.replaceAll(" ","").split(","),o.sh=parseFloat(document.form1.glub.value)-50,o.dl.forEach(e=>{switch(e=parseFloat(e),350==round(e,50)&&(total+=o.sh/1e3*700),round(e,100)){case 300:total+=o.sh/1e3*550;case 400:total+=o.sh/1e3*800;case 500:total+=o.sh/1e3*1e3;case 600:total+=o.sh/1e3*1200;case 700:total+=o.sh/1e3*1400;case 800:total+=o.sh/1e3*1500;case 900:total+=o.sh/1e3*1700;case 100:total+=o.sh/1e3*1900;case 110:total+=o.sh/1e3*2200;case 120:total+=o.sh/1e3*2400;case 130:total+=o.sh/1e3*2600;case 140:total+=o.sh/1e3*2800}})}""!=document.form1.stoiki.value&&(total+=350*parseFloat(document.form1.stoiki.value)),document.form1.dno.checked&&(total+=2*parseFloat(document.form1.width.value)),""!=document.form1.pereg.value&&(total+=1.5*parseFloat(document.form1.pereg.value)),""!=document.form1.sh_k.value&&""!=document.form1.sh_d.value&&(total+=1.5*parseFloat(document.form1.sh_d.value)*parseFloat(document.form1.sh_k.value)),document.form1.el.checked&&(total+=7e3),""!=document.form1.pult.value&&(total+=1500*parseFloat(document.form1.pult.value)),""!=document.form1.germ.value&&(total+=2500*parseFloat(document.form1.germ.value)),""!=document.form1.hydr.value&&(total+=2500*parseFloat(document.form1.hydr.value)),""!=document.form1.mod.value&&(total+=3500*parseFloat(document.form1.mod.value)),""!=document.form1.kol.value&&(total+=5e3*parseFloat(document.form1.kol.value)),""!=document.form1.dem.value&&(total+=3500*parseFloat(document.form1.dem.value)),""!=document.form1.dem2.value&&(total+=2e3*parseFloat(document.form1.dem2.value)),console.log("total",total),isNaN(total)||(document.querySelector("textarea[name='summ']").value=total)});
+let round = function (num, precision) {
+    num = parseFloat(num);
+    if (!precision) return num;
+    return Math.round(num / precision) * precision;
+};
+
+document.form1.addEventListener("input", (event) => {
+    let obj = {
+        total: 0,
+        width: round(parseFloat(document.form1.width), 50),
+        height: round(parseFloat(document.form1.height), 50),
+        glub: parseFloat(document.form1.glub),
+        krisha: document.form1.krisha.checked,
+        l_stenka: document.form1.l_stenka.checked,
+        p_stenka: document.form1.p_stenka.checked,
+        rol: document.form1.rol.checked,
+        dop_rol: parseFloat(document.form1.dop_rol),
+        z_width: parseFloat(document.form1.z_width),
+        z_height: parseFloat(document.form1.z_height),
+        pol: parseFloat(document.form1.pol),
+        stoiki: parseFloat(document.form1.stoiki),
+        dno: document.form1.dno.checked,
+        pereg: parseFloat(document.form1.pereg),
+        sh_k: parseFloat(document.form1.sh_k),
+        sh_d: parseFloat(document.form1.sh_d),
+        pult: parseFloat(document.form1.pult),
+        el: document.form1.el.checked,
+        germ: parseFloat(document.form1.germ),
+        hydr: parseFloat(document.form1.hydr),
+        mod: parseFloat(document.form1.mod),
+        kol: parseFloat(document.form1.kol),
+        dem: parseFloat(document.form1.dem),
+        dem2: parseFloat(document.form1.dem2),
+        summ: parseFloat(document.form1.summ),
+    };
+
+    obj.total = 30000;
+
+    if (obj.krisha == true) {
+        obj.total = obj.total - 700;
+    }
+    if (obj.l_stenka == true) {
+        obj.total = obj.total - 2000;
+    }
+    if (obj.p_stenka == true) {
+        obj.total = obj.total - 2000;
+    }
+    if (obj.rol == true) {
+        obj.total = obj.total - 7000;
+    }
+
+    if (obj.dop_rol != (undefined || "")) {
+        obj.total = obj.total + 7000 * obj.dop_rol;
+    }
+
+    if (obj.z_width != (undefined || "") && obj.z_height != (undefined || "")) {
+        obj.total = obj.total + ((obj.z_width * obj.z_height) / 1000000) * 2000;
+    }
+
+    if (obj.pol != (undefined || "")) {
+        let pol_dl = obj.pol.replaceAll(" ", "").split(",");
+        let pol_sh = obj.glub - 50;
+
+        pol_dl.forEach((glubina) => {
+            glubina = glubina;
+            if (round(glubina, 50) == 350) {
+                obj.total = obj.total + (pol_sh / 1000) * 700;
+            }
+            switch (round(glubina, 100)) {
+                case 300:
+                    obj.total = obj.total + (pol_sh / 1000) * 550;
+                case 400:
+                    obj.total = obj.total + (pol_sh / 1000) * 800;
+                case 500:
+                    obj.total = obj.total + (pol_sh / 1000) * 1000;
+                case 600:
+                    obj.total = obj.total + (pol_sh / 1000) * 1200;
+                case 700:
+                    obj.total = obj.total + (pol_sh / 1000) * 1400;
+                case 800:
+                    obj.total = obj.total + (pol_sh / 1000) * 1500;
+                case 900:
+                    obj.total = obj.total + (pol_sh / 1000) * 1700;
+                case 100:
+                    obj.total = obj.total + (pol_sh / 1000) * 1900;
+                case 110:
+                    obj.total = obj.total + (pol_sh / 1000) * 2200;
+                case 120:
+                    obj.total = obj.total + (pol_sh / 1000) * 2400;
+                case 130:
+                    obj.total = obj.total + (pol_sh / 1000) * 2600;
+                case 140:
+                    obj.total = obj.total + (pol_sh / 1000) * 2800;
+            }
+        });
+    }
+
+    if (obj.stoiki != (undefined || "")) {
+        obj.total = obj.total + 350 * obj.stoiki;
+    }
+
+    if (obj.dno == true) {
+        obj.total = obj.total + obj.width * 2;
+    }
+
+    if (obj.pereg != (undefined || "")) {
+        obj.total = obj.total + 1.5 * obj.pereg;
+    }
+
+    if (obj.sh_k != (undefined || "") && obj.sh_d != (undefined || "")) {
+        obj.total = obj.total + obj.sh_d * 1.5 * obj.sh_k;
+    }
+
+    if (obj.el == true) {
+        obj.total = obj.total + 7000;
+    }
+
+    if (obj.pult != (undefined || "")) {
+        obj.total = obj.total + 1500 * obj.pult;
+    }
+
+    if (obj.germ != (undefined || "")) {
+        obj.total = obj.total + obj.germ * 2500;
+    }
+    if (obj.hydr != (undefined || "")) {
+        obj.total = obj.total + obj.hydr * 2500;
+    }
+    if (obj.mod != (undefined || "")) {
+        obj.total = obj.total + obj.mod * 3500;
+    }
+    if (obj.kol != (undefined || "")) {
+        obj.total = obj.total + obj.kol * 5000;
+    }
+    if (obj.dem != (undefined || "")) {
+        obj.total = obj.total + obj.dem * 3500;
+    }
+    if (obj.dem2 != (undefined || "")) {
+        obj.total = obj.total + obj.dem2 * 2000;
+    }
+
+    console.log("obj.total", obj.total);
+
+    if (!isNaN(obj.total)) {
+        document.querySelector("textarea[name='summ']") = obj.total;
+    } else {
+    }
+});
