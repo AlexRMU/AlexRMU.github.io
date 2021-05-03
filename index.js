@@ -1,4 +1,3 @@
-
 let round = function (num, precision) {
     num = parseFloat(num);
     if (!precision) return num;
@@ -6,7 +5,6 @@ let round = function (num, precision) {
 };
 
 function count() {
-
     let obj = {
         total: 0,
         width: round(parseFloat(document.form1.width), 50),
@@ -151,6 +149,12 @@ function count() {
 document.form1.addEventListener("input", count);
 
 const w = window.EnvyCrmWidget;
+
+let searchParams = new URLSearchParams(window.location.search);
+let client_id = searchParams.get("client_id");
+let deal_id = searchParams.get("deal_id");
+console.log(client_id);
+console.log(deal_id);
 
 w.getParams()
     .then((params) => {
