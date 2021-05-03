@@ -5,7 +5,8 @@ let round = function (num, precision) {
     return Math.round(num / precision) * precision;
 };
 
-document.form1.addEventListener("input", (event) => {
+function count() {
+
     let obj = {
         total: 0,
         width: round(parseFloat(document.form1.width), 50),
@@ -145,7 +146,9 @@ document.form1.addEventListener("input", (event) => {
         document.querySelector("textarea[name='summ']").value = obj.total;
     } else {
     }
-});
+}
+
+document.form1.addEventListener("input", count);
 
 window.addEventListener(
     "message",
