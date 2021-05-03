@@ -1,3 +1,6 @@
+//cd D:\Downloads\server\AlexRMU.github.io
+//nodemon -V -w . -x "cls && git add . && git commit . -m 1 && git push -f"
+
 let round = function (num, precision) {
     num = parseFloat(num);
     if (!precision) return num;
