@@ -250,9 +250,6 @@ document.addEventListener("DOMContentLoaded", (x) => {
             }
 
             obj.total = parseFloat(obj.total) + parseFloat(obj.options[i].total)
-
-            console.log(obj.options[i]);
-            console.log(obj.total);
         }
 
         try {
