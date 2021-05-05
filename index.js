@@ -69,6 +69,10 @@ document.addEventListener("DOMContentLoaded", (x) => {
         document.querySelector("[id='3']").innerText = "";
 
         function polka(param) {
+            console.log(param)
+            if (param.value){
+                // return param
+            }
             let pol_gl =
                 parseFloat(
                     obj.options.find((x) => x.name === "Глубина").value
