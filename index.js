@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
                     console.log(e);
                 })
                 .then((data) => {
+                    console.log(data)
                     obj.options[i].value = parseFloat(data.value);
                     if (isNaN(obj.options[i].value)){
                         obj.options[i].value = 0
