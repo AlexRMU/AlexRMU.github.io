@@ -61,6 +61,9 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 })
                 .then((data) => {
                     obj.options[i].value = parseFloat(data.value);
+                    if (isNaN(obj.options[i].value)){
+                        obj.options[i].value = 0
+                    }
                     obj.options[i].total = 0;
                 });
         }
@@ -69,9 +72,9 @@ document.addEventListener("DOMContentLoaded", (x) => {
         document.querySelector("[id='3']").innerText = "";
 
         function polka(param) {
-            console.log(param)
-            if (param.value){
-                // return param
+            if (isNaN(param.value)){
+                param.total = 0
+                return param
             }
             let pol_gl =
                 parseFloat(
