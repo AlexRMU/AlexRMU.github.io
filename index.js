@@ -250,6 +250,9 @@ document.addEventListener("DOMContentLoaded", (x) => {
             }
 
             obj.total = obj.total + obj.options[i].total;
+
+            console.log(obj.options[i]);
+            console.log(obj.total);
         }
 
         try {
