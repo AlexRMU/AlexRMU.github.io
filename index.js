@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 obj.options[i] = polka(obj.options[i]);
             }
 
-            obj.total = obj.total + obj.options[i].total;
+            obj.total = parseFloat(obj.total) + parseFloat(obj.options[i].total)
 
             console.log(obj.options[i]);
             console.log(obj.total);
