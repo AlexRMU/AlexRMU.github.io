@@ -60,12 +60,16 @@ document.addEventListener("DOMContentLoaded", (x) => {
                     console.log(e);
                 })
                 .then((data) => {
-                    console.log(data)
-                    obj.options[i].value = parseFloat(data.value);
-                    if (isNaN(obj.options[i].value)){
-                        obj.options[i].value = 0
+                    if (data == null) {
+                        obj.options[i].value = 0;
+                        obj.options[i].total = 0;
+                    } else {
+                        obj.options[i].value = parseFloat(data.value);
+                        if (isNaN(obj.options[i].value)) {
+                            obj.options[i].value = 0;
+                        }
+                        obj.options[i].total = 0;
                     }
-                    obj.options[i].total = 0;
                 });
         }
 
@@ -73,14 +77,16 @@ document.addEventListener("DOMContentLoaded", (x) => {
         document.querySelector("[id='3']").innerText = "";
 
         function polka(param) {
-            if (isNaN(param.value)){
-                param.total = 0
-                return param
+            if (isNaN(param.value)) {
+                param.total = 0;
+                return param;
             }
-            let pol_gl =
-                parseFloat(
-                    obj.options.find((x) => x.name === "Глубина").value
-                ) - 50;
+            let pol_gl = obj.options.find((x) => x.name === "Глубина").value;
+            if (pol_gl == 0) {
+                param.total = 0;
+                return param;
+            }
+            pol_gl = pol_gl - 50;
             let pol_dl = param.value;
 
             if (round(pol_gl, 50) == 350) {
@@ -130,15 +136,26 @@ document.addEventListener("DOMContentLoaded", (x) => {
 
         for (let i = 0; i < obj.options.length; i++) {
             if (obj.options[i].name == "Высота") {
-                obj.options[i].total = parseFloat(
-                    base[`${round(obj.options[i].value, 50)}`][
-                        `${round(
-                            obj.options.find((x) => x.name === "Ширина").value,
-                            100
-                        )}`
-                    ]
-                );
-                if (obj.options[i].total == 0 || isNaN(obj.options[i].total)) {
+                if (obj.options.find((x) => x.name === "Ширина").value != 0) {
+                    obj.options[i].total = parseFloat(
+                        base[`${round(obj.options[i].value, 50)}`][
+                            `${round(
+                                obj.options.find((x) => x.name === "Ширина")
+                                    .value,
+                                100
+                            )}`
+                        ]
+                    );
+                    if (
+                        obj.options[i].total == 0 ||
+                        isNaN(obj.options[i].total)
+                    ) {
+                        document.querySelector("[id='3']").innerText =
+                            document.querySelector("[id='3']").innerText +
+                            `\n---\nЦена базы не найдена!\n---\n`;
+                        throw new Error("Цена базы не найдена!");
+                    }
+                } else {
                     document.querySelector("[id='3']").innerText =
                         document.querySelector("[id='3']").innerText +
                         `\n---\nЦена базы не найдена!\n---\n`;
@@ -181,19 +198,26 @@ document.addEventListener("DOMContentLoaded", (x) => {
             }
             if (obj.options[i].name == "Задняя стенка") {
                 if (obj.options[i].value == 1269716) {
-                    obj.options[i].total =
-                        ((parseFloat(
-                            obj.options.find(
+                    if (
+                        obj.options.find(
+                            (x) => x.name === "Задняя стенка(ширина)"
+                        ).value != 0 &&
+                        obj.options.find(
+                            (x) => x.name === "Задняя стенка(высота)"
+                        ).value != 0
+                    ) {
+                        obj.options[i].total =
+                            ((obj.options.find(
                                 (x) => x.name === "Задняя стенка(ширина)"
-                            ).value
-                        ) *
-                            parseFloat(
+                            ).value *
                                 obj.options.find(
                                     (x) => x.name === "Задняя стенка(высота)"
-                                ).value
-                            )) /
-                            1000000) *
-                        2000;
+                                ).value) /
+                                1000000) *
+                            2000;
+                    } else {
+                        obj.options[i].total = 0;
+                    }
                 }
             }
             if (obj.options[i].name == "Стойки") {
@@ -201,22 +225,29 @@ document.addEventListener("DOMContentLoaded", (x) => {
             }
             if (obj.options[i].name == "Дно") {
                 if (obj.options[i].value == 1) {
-                    obj.options[i].total =
-                        parseFloat(
-                            obj.options.find((x) => x.name === "Ширина").value
-                        ) * 2;
+                    if (
+                        obj.options.find((x) => x.name === "Ширина").value != 0
+                    ) {
+                        obj.options[i].total =
+                            obj.options.find((x) => x.name === "Ширина").value *
+                            2;
+                    } else {
+                        obj.options[i].total = 0;
+                    }
                 }
             }
             if (obj.options[i].name == "Перегородка(Высота)") {
                 obj.options[i].total = obj.options[i].value * 1.5;
             }
             if (obj.options[i].name == "Штанга") {
-                obj.options[i].total =
-                    obj.options[i].value *
-                    parseFloat(
-                        obj.options.find((x) => x.name === "Длина").value
-                    ) *
-                    1.5;
+                if (obj.options.find((x) => x.name === "Длина").value != 0) {
+                    obj.options[i].total =
+                        obj.options[i].value *
+                        obj.options.find((x) => x.name === "Длина").value *
+                        1.5;
+                } else {
+                    obj.options[i].total = 0;
+                }
             }
             if (obj.options[i].name == "Электропривод 1 ставни + 1 пульт") {
                 obj.options[i].total = 7000;
@@ -250,16 +281,16 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 obj.options[i] = polka(obj.options[i]);
             }
 
-            obj.total = parseFloat(obj.total) + parseFloat(obj.options[i].total)
-        }
-
-        try {
-            obj.total = obj.total.toFixed(0);
-        } catch (error) {
-            console.log(error);
+            obj.total =
+                parseFloat(obj.total) + parseFloat(obj.options[i].total);
         }
 
         if (!isNaN(obj.total)) {
+            try {
+                obj.total = obj.total.toFixed(0);
+            } catch (error) {
+                console.log(error);
+            }
             document.querySelector("[name='summ']").value = obj.total;
         } else {
             document.querySelector("[id='3']").innerText =
