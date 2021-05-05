@@ -4,91 +4,28 @@
         <meta content="IE=edge" http-equiv="X-UA-Compatible" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-        />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-
         <script src="https://cdn.saas-support.com/crm_assets/build/widget/js/envycrmwidget.min.js"></script>
     </head>
 
-    <div id="page">
-        <form name="form1">
-            Ширина: <input type="number" name="width" required /><br />
-            Высота: <input type="number" name="height" required /><br />
-            Глубина: <input type="number" name="glub" required /><br />
-            Отсутствие крыши: <input type="checkbox" name="krisha" /><br />
-            Отсутствие левой стенки:
-            <input type="checkbox" name="l_stenka" /><br />
-            Отсутствие правой стенки:
-            <input type="checkbox" name="p_stenka" /><br />
-            Отсутствие рольставни:
-            <input type="checkbox" name="rol" /><br />
-            Доп. рольставни:
-            <input type="number" name="dop_rol" required /><br />
-            Задняя стенка (ширина):
-            <input type="number" name="z_width" required /><br />
-            Задняя стенка (высота):
-            <input type="number" name="z_height" required /><br />
-            Длины полок через запятую:
-            <input type="text" name="pol" required /><br />
-            Стойки: <input type="number" name="stoiki" required /><br />
-            Дно: <input type="checkbox" name="dno" /><br />
-            Перегородка (высота):
-            <input type="number" name="pereg" required /><br />
-            Штанга шт.: <input type="number" name="sh_k" required /><br />
-            Штанга (длина): <input type="number" name="sh_d" required /><br />
-            Дополнительный пульт:
-            <input type="number" name="pult" required /><br />
-            <hr />
-            Электропривод: <input type="checkbox" name="el" /><br />
-            Дополнительные опции: <br />
-            Герметизация швов по полу и стенам (шт.)<input
-                type="number"
-                name="germ"
-                required
-            /><br />
-            Гидроизоляция стен грунтом по бетону в 2 слоя (шт.)<input
-                type="number"
-                name="hydr"
-                required
-            /><br />
-            Модуль пожаротушения (шт.)<input
-                type="number"
-                name="mod"
-                required
-            /><br />
-            Колесо – отбойники резиновые (шт.)<input
-                type="number"
-                name="kol"
-                required
-            /><br />
-            Демонтаж/Монтаж имеющегося отбойника (шт.)<input
-                type="number"
-                name="dem"
-                required
-            /><br />
-            Демонтаж имеющегося отбойника (шт.)<input
-                type="number"
-                name="dem2"
-                required
-            /><br />
-        </form>
-
-        Стоимость шкафа: <textarea readonly name="summ"></textarea>
-    </div>
-
-    <style>
-        body {
-            margin: 0;
-        }
-        #main {
-            border: 2px solid red;
-            height: 100%;
-            width: 500px;
-        }
-    </style>
-
-    <script src="./index.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            let params = {
+                "before-deal-task": function (params) {
+                    return [
+                        {
+                            title: "Калькулятор",
+                            events: ['deal::update-value'],
+                            content: {
+                                type: "iframe",
+                                url:
+                                    "https://341717e6cdb5.ngrok.io/widget.html",
+                                height: 150,
+                            },
+                        },
+                    ];
+                },
+            };
+            window.EnvyCrmWidget.init(params);
+        });
+    </script>
 </html>
