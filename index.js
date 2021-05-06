@@ -138,8 +138,8 @@ document.addEventListener("DOMContentLoaded", (x) => {
         obj.total = 0;
 
         for (let i = 0; i < obj.options.length; i++) {
-            let sh = obj.options.find((x) => x.name === "Ширина").value;
             if (obj.options[i].name == "Высота") {
+                let sh = obj.options.find((x) => x.name === "Ширина").value;
                 if (obj.options[i].value < 2000) {
                     obj.options[i].value = 2000;
                 }
@@ -237,8 +237,12 @@ document.addEventListener("DOMContentLoaded", (x) => {
             }
             if (obj.options[i].name == "Дно") {
                 if (obj.options[i].value == 1) {
-                    if (sh != 0) {
-                        obj.options[i].total = sh * 2;
+                    if (
+                        obj.options.find((x) => x.name === "Ширина").value != 0
+                    ) {
+                        obj.options[i].total =
+                            obj.options.find((x) => x.name === "Ширина").value *
+                            2;
                     } else {
                         obj.options[i].total = 0;
                     }
@@ -312,15 +316,20 @@ document.addEventListener("DOMContentLoaded", (x) => {
             if (obj.options[i].total != 0) {
                 if (obj.options[i].name == "Высота") {
                     if (obj.options[i].value != 0) {
-                        if (sh != 0) {
+                        if (
+                            obj.options.find((x) => x.name === "Ширина")
+                                .value != 0
+                        ) {
                             document.querySelector("[id='3']").innerText =
                                 document.querySelector("[id='3']").innerText +
                                 `База * ${round(
                                     obj.options[i].value,
                                     50
-                                )} * ${round(sh, 100)} = ${
-                                    obj.options[i].total
-                                }` +
+                                )} * ${round(
+                                    obj.options.find((x) => x.name === "Ширина")
+                                        .value,
+                                    100
+                                )} = ${obj.options[i].total}` +
                                 "\n";
                         }
                     }
