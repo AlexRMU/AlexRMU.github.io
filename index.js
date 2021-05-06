@@ -29,6 +29,12 @@ function round(num, precision) {
     return Math.round(num / precision) * precision;
 }
 
+function round2(num, precision) {
+    num = parseFloat(num);
+    if (!precision) return num;
+    return Math.ceil(num / precision) * precision;
+}
+
 document.querySelector("[id='2']").onclick = () => {
     if (document.querySelector("[id='3']").style.opacity == 1) {
         document.querySelector("[id='3']").style.opacity = 0;
@@ -89,10 +95,10 @@ document.addEventListener("DOMContentLoaded", (x) => {
             pol_gl = pol_gl - 50;
             let pol_dl = param.value;
 
-            if (round(pol_gl, 50) == 350) {
+            if (round2(pol_gl, 50) == 350) {
                 param.total = (pol_dl / 1000) * 700;
             }
-            switch (round(pol_gl, 100)) {
+            switch (round2(pol_gl, 100)) {
                 case 300:
                     param.total = (pol_dl / 1000) * 550;
                     break;
@@ -136,10 +142,31 @@ document.addEventListener("DOMContentLoaded", (x) => {
 
         for (let i = 0; i < obj.options.length; i++) {
             if (obj.options[i].name == "Высота") {
+                if (obj.options[i].value < 2000) {
+                    obj.options[i].value = 2000;
+                }
+                if (obj.options[i].value > 3100) {
+                    obj.options[i].value = 3100;
+                }
                 if (obj.options.find((x) => x.name === "Ширина").value != 0) {
+                    if (
+                        obj.options.find((x) => x.name === "Ширина").value < 700
+                    ) {
+                        obj.options.find(
+                            (x) => x.name === "Ширина"
+                        ).value = 700;
+                    }
+                    if (
+                        obj.options.find((x) => x.name === "Ширина").value >
+                        6000
+                    ) {
+                        obj.options.find(
+                            (x) => x.name === "Ширина"
+                        ).value = 6000;
+                    }
                     obj.options[i].total = parseFloat(
-                        base[`${round(obj.options[i].value, 50)}`][
-                            `${round(
+                        base[`${round2(obj.options[i].value, 50)}`][
+                            `${round2(
                                 obj.options.find((x) => x.name === "Ширина")
                                     .value,
                                 100
@@ -250,7 +277,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 }
             }
             if (obj.options[i].name == "Электропривод 1 ставни + 1 пульт") {
-                obj.options[i].total = 7000;
+                obj.options[i].total = obj.options[i].value * 7000;
             }
             if (obj.options[i].name == "Дополнительный пульт") {
                 obj.options[i].total = obj.options[i].value * 1500;
@@ -304,7 +331,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 if (obj.options[i].name == "Высота") {
                     document.querySelector("[id='3']").innerText =
                         document.querySelector("[id='3']").innerText +
-                        `База * ${round(obj.options[i].value, 50)} * ${round(
+                        `База * ${round2(obj.options[i].value, 50)} * ${round2(
                             obj.options.find((x) => x.name === "Ширина").value,
                             100
                         )} = ${obj.options[i].total}` +
