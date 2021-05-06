@@ -1,4 +1,6 @@
-let base = JSON.parse(`{
+let base;
+let obj;
+base = JSON.parse(`{
     "3100":{"700":"45000","800":"47000","900":"49000","1000":"51000","1100":"53000","1200":"56000","1300":"58000","1400":"60000","1500":"62000","1600":"64000","1700":"66000","1800":"68000","1900":"74000","2000":"75000","2100":"77000","2200":"79000","2300":"81000","2400":"83000","2500":"85000","2600":"90000","2700":"92000","2800":"94000","2900":"96000","3000":"99000","3100":"101000","3200":"103000","3300":"105000","3400":"107000","3500":"109000","3600":"111000","3700":"113000","3800":"115000","3900":"117000","4000":"120000","4100":"122000","4200":"124000","4300":"126000","4400":"128000","4500":"131000","4600":"134000","4700":"137000","4800":"141000","4900":"144000","5000":"147000","5100":"150000","5200":"153000","5300":"156000","5400":"159000","5500":"163000","5600":"169000","5700":"173000","5800":"177000","5900":"182000","6000":"186000"},
     "3050":{"700":"44000","800":"47000","900":"49000","1000":"51000","1100":"53000","1200":"55000","1300":"57000","1400":"59000","1500":"61000","1600":"63000","1700":"65000","1800":"68000","1900":"74000","2000":"75000","2100":"76000","2200":"78000","2300":"79000","2400":"82000","2500":"84000","2600":"89000","2700":"91000","2800":"93000","2900":"95000","3000":"98000","3100":"99000","3200":"101000","3300":"103000","3400":"105000","3500":"107000","3600":"109000","3700":"111000","3800":"113000","3900":"115000","4000":"117000","4100":"120000","4200":"122000","4300":"124000","4400":"126000","4500":"129000","4600":"132000","4700":"135000","4800":"138000","4900":"142000","5000":"145000","5100":"148000","5200":"151000","5300":"154000","5400":"157000","5500":"161000","5600":"167000","5700":"171000","5800":"175000","5900":"179000","6000":"184000"},
     "3000":{"700":"44000","800":"46000","900":"48000","1000":"50000","1100":"52000","1200":"54000","1300":"57000","1400":"59000","1500":"61000","1600":"63000","1700":"65000","1800":"67000","1900":"73000","2000":"74000","2100":"75000","2200":"77000","2300":"78000","2400":"81000","2500":"83000","2600":"85000","2700":"90000","2800":"92000","2900":"94000","3000":"96000","3100":"96000","3200":"99000","3300":"101000","3400":"103000","3500":"105000","3600":"107000","3700":"109000","3800":"111000","3900":"113000","4000":"115000","4100":"117000","4200":"120000","4300":"122000","4400":"124000","4500":"127000","4600":"130000","4700":"133000","4800":"136000","4900":"140000","5000":"143000","5100":"146000","5200":"149000","5300":"152000","5400":"155000","5500":"158000","5600":"162000","5700":"168000","5800":"173000","5900":"177000","6000":"182000"},
@@ -23,11 +25,7 @@ let base = JSON.parse(`{
     "2050":{"700":"34000","800":"36000","900":"38000","1000":"40000","1100":"42000","1200":"44000","1300":"47000","1400":"49000","1500":"51000","1600":"53000","1700":"55000","1800":"57000","1900":"60000","2000":"62000","2100":"63000","2200":"64000","2300":"65000","2400":"66000","2500":"68000","2600":"69000","2700":"70000","2800":"71000","2900":"72000","3000":"73000","3100":"77000","3200":"78000","3300":"79000","3400":"80000","3500":"81000","3600":"82000","3700":"83000","3800":"84000","3900":"84000","4000":"86000","4100":"88000","4200":"89000","4300":"91000","4400":"93000","4500":"91000","4600":"93000","4700":"95000","4800":"99000","4900":"101000","5000":"103000","5100":"106000","5200":"109000","5300":"112000","5400":"115000","5500":"119000","5600":"122000","5700":"125000","5800":"128000","5900":"131000","6000":"134000"},
     "2000":{"700":"33000","800":"36000","900":"38000","1000":"40000","1100":"42000","1200":"44000","1300":"46000","1400":"48000","1500":"50000","1600":"52000","1700":"54000","1800":"57000","1900":"59000","2000":"61000","2100":"62000","2200":"63000","2300":"64000","2400":"65000","2500":"67000","2600":"69000","2700":"70000","2800":"71000","2900":"72000","3000":"73000","3100":"75000","3200":"77000","3300":"78000","3400":"79000","3500":"80000","3600":"81000","3700":"82000","3800":"83000","3900":"84000","4000":"85000","4100":"87000","4200":"88000","4300":"90000","4400":"92000","4500":"90000","4600":"92000","4700":"94000","4800":"96000","4900":"99000","5000":"101000","5100":"104000","5200":"107000","5300":"110000","5400":"113000","5500":"116000","5600":"120000","5700":"123000","5800":"126000","5900":"129000","6000":"132000"}}`);
 
-function round(num, precision) {
-    num = parseFloat(num);
-    if (!precision) return num;
-    return Math.ceil(num / precision) * precision;
-}
+obj = {};
 
 document.querySelector("[id='2']").onclick = () => {
     if (document.querySelector("[id='3']").style.opacity == 1) {
@@ -39,9 +37,13 @@ document.querySelector("[id='2']").onclick = () => {
     }
 };
 
-let obj = {};
+function round(num, precision) {
+    num = parseFloat(num);
+    if (!precision) return num;
+    return Math.ceil(num / precision) * precision;
+}
 
-function polka(param) {
+function polka(param, obj) {
     if (isNaN(param.value)) {
         param.total = 0;
         return param;
@@ -95,7 +97,7 @@ function polka(param) {
                 param.total = (pol_dl / 1000) * 2800;
                 break;
         }
-        param.total = param.total.toFixed(2)
+        param.total = param.total.toFixed(2);
         return param;
     }
 }
@@ -122,14 +124,13 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 .then((data) => {
                     if (data == null) {
                         obj.options[i].value = 0;
-                        obj.options[i].total = 0;
                     } else {
                         obj.options[i].value = parseFloat(data.value);
                         if (isNaN(obj.options[i].value)) {
                             obj.options[i].value = 0;
                         }
-                        obj.options[i].total = 0;
                     }
+                    obj.options[i].total = 0;
                 });
         }
 
@@ -137,6 +138,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
         obj.total = 0;
 
         for (let i = 0; i < obj.options.length; i++) {
+            let sh = obj.options.find((x) => x.name === "Ширина").value;
             if (obj.options[i].name == "Высота") {
                 if (obj.options[i].value < 2000) {
                     obj.options[i].value = 2000;
@@ -144,29 +146,16 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 if (obj.options[i].value > 3100) {
                     obj.options[i].value = 3100;
                 }
-                if (obj.options.find((x) => x.name === "Ширина").value != 0) {
-                    if (
-                        obj.options.find((x) => x.name === "Ширина").value < 700
-                    ) {
-                        obj.options.find(
-                            (x) => x.name === "Ширина"
-                        ).value = 700;
+                if (sh != 0) {
+                    if (sh < 700) {
+                        sh = 700;
                     }
-                    if (
-                        obj.options.find((x) => x.name === "Ширина").value >
-                        6000
-                    ) {
-                        obj.options.find(
-                            (x) => x.name === "Ширина"
-                        ).value = 6000;
+                    if (sh > 6000) {
+                        sh = 6000;
                     }
                     obj.options[i].total = parseFloat(
                         base[`${round(obj.options[i].value, 50)}`][
-                            `${round(
-                                obj.options.find((x) => x.name === "Ширина")
-                                    .value,
-                                100
-                            )}`
+                            `${round(sh, 100)}`
                         ]
                     );
                     if (
@@ -248,12 +237,8 @@ document.addEventListener("DOMContentLoaded", (x) => {
             }
             if (obj.options[i].name == "Дно") {
                 if (obj.options[i].value == 1) {
-                    if (
-                        obj.options.find((x) => x.name === "Ширина").value != 0
-                    ) {
-                        obj.options[i].total =
-                            obj.options.find((x) => x.name === "Ширина").value *
-                            2;
+                    if (sh != 0) {
+                        obj.options[i].total = sh * 2;
                     } else {
                         obj.options[i].total = 0;
                     }
@@ -289,26 +274,31 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 }
             }
             if (obj.options[i].name == "Длина полки-1") {
-                obj.options[i] = polka(obj.options[i]);
+                obj.options[i] = polka(obj.options[i], obj);
             }
             if (obj.options[i].name == "Длина полки-2") {
-                obj.options[i] = polka(obj.options[i]);
+                obj.options[i] = polka(obj.options[i], obj);
             }
             if (obj.options[i].name == "Длина полки-3") {
-                obj.options[i] = polka(obj.options[i]);
+                obj.options[i] = polka(obj.options[i], obj);
             }
             if (obj.options[i].name == "Длина полки-4") {
-                obj.options[i] = polka(obj.options[i]);
+                obj.options[i] = polka(obj.options[i], obj);
             }
             if (obj.options[i].name == "Длина полки-5") {
-                obj.options[i] = polka(obj.options[i]);
+                obj.options[i] = polka(obj.options[i], obj);
             }
 
             obj.total =
                 parseFloat(obj.total) + parseFloat(obj.options[i].total);
         }
 
-        if (!isNaN(obj.total)) {
+        if (isNaN(obj.total)) {
+            document.querySelector("[id='3']").innerText =
+                document.querySelector("[id='3']").innerText +
+                `\n---\ntotal не число!\n---\n`;
+            throw new Error("total не число!");
+        } else {
             try {
                 obj.total = obj.total.toFixed(0);
             } catch (error) {
@@ -316,23 +306,24 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 console.log(error);
             }
             document.querySelector("[name='summ']").value = obj.total;
-        } else {
-            document.querySelector("[id='3']").innerText =
-                document.querySelector("[id='3']").innerText +
-                `\n---\ntotal не число!\n---\n`;
-            throw new Error("total не число!");
         }
 
         for (let i = 0; i < obj.options.length; i++) {
             if (obj.options[i].total != 0) {
                 if (obj.options[i].name == "Высота") {
-                    document.querySelector("[id='3']").innerText =
-                        document.querySelector("[id='3']").innerText +
-                        `База * ${round(obj.options[i].value, 50)} * ${round(
-                            obj.options.find((x) => x.name === "Ширина").value,
-                            100
-                        )} = ${obj.options[i].total}` +
-                        "\n";
+                    if (obj.options[i].value != 0) {
+                        if (sh != 0) {
+                            document.querySelector("[id='3']").innerText =
+                                document.querySelector("[id='3']").innerText +
+                                `База * ${round(
+                                    obj.options[i].value,
+                                    50
+                                )} * ${round(sh, 100)} = ${
+                                    obj.options[i].total
+                                }` +
+                                "\n";
+                        }
+                    }
                 } else if (obj.options[i].name == "Ширина") {
                 } else {
                     document.querySelector("[id='3']").innerText =
@@ -357,16 +348,16 @@ document.addEventListener("DOMContentLoaded", (x) => {
             });
     }
 
-    document.querySelector("#btn").onclick = function () {
-        count();
+    document.querySelector("#btn").onclick = async function () {
+        await count();
     };
 
     window.addEventListener(
         "message",
-        function (event) {
+        async function (event) {
             if (event.data.type == "deal::update-value") {
                 if (event.data.data.params.data.input_id != 333215) {
-                    count();
+                    await count();
                 }
             }
         },
