@@ -26,12 +26,6 @@ let base = JSON.parse(`{
 function round(num, precision) {
     num = parseFloat(num);
     if (!precision) return num;
-    return Math.round(num / precision) * precision;
-}
-
-function round2(num, precision) {
-    num = parseFloat(num);
-    if (!precision) return num;
     return Math.ceil(num / precision) * precision;
 }
 
@@ -56,52 +50,53 @@ function polka(param) {
     if (pol_gl == 0) {
         param.total = 0;
         return param;
-    }
-    pol_gl = pol_gl - 50;
-    let pol_dl = param.value;
+    } else {
+        pol_gl = pol_gl - 50;
+        let pol_dl = param.value;
 
-    if (round2(pol_gl, 50) == 350) {
-        param.total = (pol_dl / 1000) * 700;
+        if (round(pol_gl, 50) == 350) {
+            param.total = (pol_dl / 1000) * 700;
+        }
+        switch (round(pol_gl, 100)) {
+            case 300:
+                param.total = (pol_dl / 1000) * 550;
+                break;
+            case 400:
+                param.total = (pol_dl / 1000) * 800;
+                break;
+            case 500:
+                param.total = (pol_dl / 1000) * 1000;
+                break;
+            case 600:
+                param.total = (pol_dl / 1000) * 1200;
+                break;
+            case 700:
+                param.total = (pol_dl / 1000) * 1400;
+                break;
+            case 800:
+                param.total = (pol_dl / 1000) * 1500;
+                break;
+            case 900:
+                param.total = (pol_dl / 1000) * 1700;
+                break;
+            case 1000:
+                param.total = (pol_dl / 1000) * 1900;
+                break;
+            case 1100:
+                param.total = (pol_dl / 1000) * 2200;
+                break;
+            case 1200:
+                param.total = (pol_dl / 1000) * 2400;
+                break;
+            case 1300:
+                param.total = (pol_dl / 1000) * 2600;
+                break;
+            case 1400:
+                param.total = (pol_dl / 1000) * 2800;
+                break;
+        }
+        return param;
     }
-    switch (round2(pol_gl, 100)) {
-        case 300:
-            param.total = (pol_dl / 1000) * 550;
-            break;
-        case 400:
-            param.total = (pol_dl / 1000) * 800;
-            break;
-        case 500:
-            param.total = (pol_dl / 1000) * 1000;
-            break;
-        case 600:
-            param.total = (pol_dl / 1000) * 1200;
-            break;
-        case 700:
-            param.total = (pol_dl / 1000) * 1400;
-            break;
-        case 800:
-            param.total = (pol_dl / 1000) * 1500;
-            break;
-        case 900:
-            param.total = (pol_dl / 1000) * 1700;
-            break;
-        case 1000:
-            param.total = (pol_dl / 1000) * 1900;
-            break;
-        case 1100:
-            param.total = (pol_dl / 1000) * 2200;
-            break;
-        case 1200:
-            param.total = (pol_dl / 1000) * 2400;
-            break;
-        case 1300:
-            param.total = (pol_dl / 1000) * 2600;
-            break;
-        case 1400:
-            param.total = (pol_dl / 1000) * 2800;
-            break;
-    }
-    return param;
 }
 
 document.addEventListener("DOMContentLoaded", (x) => {
@@ -138,7 +133,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
         }
 
         document.querySelector("[id='2']").innerText = "Подробнее";
-        obj.total = 0
+        obj.total = 0;
 
         for (let i = 0; i < obj.options.length; i++) {
             if (obj.options[i].name == "Высота") {
@@ -165,8 +160,8 @@ document.addEventListener("DOMContentLoaded", (x) => {
                         ).value = 6000;
                     }
                     obj.options[i].total = parseFloat(
-                        base[`${round2(obj.options[i].value, 50)}`][
-                            `${round2(
+                        base[`${round(obj.options[i].value, 50)}`][
+                            `${round(
                                 obj.options.find((x) => x.name === "Ширина")
                                     .value,
                                 100
@@ -316,7 +311,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
             try {
                 obj.total = obj.total.toFixed(0);
             } catch (error) {
-                obj.total = parseFloat(`${obj.total}`.replace(/\..+/gi,""))
+                obj.total = parseFloat(`${obj.total}`.replace(/\..+/gi, ""));
                 console.log(error);
             }
             document.querySelector("[name='summ']").value = obj.total;
@@ -332,7 +327,7 @@ document.addEventListener("DOMContentLoaded", (x) => {
                 if (obj.options[i].name == "Высота") {
                     document.querySelector("[id='3']").innerText =
                         document.querySelector("[id='3']").innerText +
-                        `База * ${round2(obj.options[i].value, 50)} * ${round2(
+                        `База * ${round(obj.options[i].value, 50)} * ${round(
                             obj.options.find((x) => x.name === "Ширина").value,
                             100
                         )} = ${obj.options[i].total}` +
