@@ -95,6 +95,7 @@ function polka(param) {
                 param.total = (pol_dl / 1000) * 2800;
                 break;
         }
+        param.total = param.total.toFixed(2)
         return param;
     }
 }
