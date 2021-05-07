@@ -4,30 +4,30 @@
         <meta content="IE=edge" http-equiv="X-UA-Compatible" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-        <script src="https://cdn.saas-support.com/crm_assets/build/widget/js/envycrmwidget.min.js"></script>
+        <script src="./src/envycrmwidget.min.js"></script>
     </head>
 
     <body>
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function (event) {
-            let params = {
-                "before-deal-task": function (params) {
-                    return [
-                        {
-                            title: "Калькулятор",
-                            events: ['deal::update-value'],
-                            content: {
-                                type: "iframe",
-                                url:
-                                    "https://alexrmu.github.io/widget.html",
-                                height: 150,
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function (event) {
+                let params = {
+                    "before-deal-task": function (params) {
+                        return [
+                            {
+                                title: "Калькулятор",
+                                events: ["deal::update-value"],
+                                content: {
+                                    type: "iframe",
+                                    url:
+                                        "https://4c81b6aa2f2b.ngrok.io/widget.html",
+                                    height: 150,
+                                },
                             },
-                        },
-                    ];
-                },
-            };
-            window.EnvyCrmWidget.init(params);
-        });
-    </script>
+                        ];
+                    },
+                };
+                window.EnvyCrmWidget.init(params);
+            });
+        </script>
     </body>
 </html>
